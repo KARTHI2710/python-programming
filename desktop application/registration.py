@@ -22,6 +22,13 @@ create_table_query = '''
 '''
 con.execute(create_table_query)
 
+qry="select count(*) from patient1"
+result=con.execute(qry)
+c=0
+for row in result:
+    c=row[0]
+uuid='p'+f"{c+1:05}"
+#print(uuid)
 def insert():
     qry="insert into patient1 (uid,title,patientname,gender,email,phone,address,doctorname,treatment) values(?,?,?,?,?,?,?,?,?)"
    # print(uid)
@@ -129,6 +136,8 @@ frame1.pack(fill=X)
 
 uid=Label(frame1,text="UID : ",font=("times",11,"bold"),bg="pink").grid(row=0,column=0,padx=5,pady=5,sticky=E)
 uidtext=Entry(frame1,font=("times",10,"bold"))
+uidtext.insert(0,uuid)
+uidtext.config(state='readonly')
 uidtext.grid(row=0,column=1,padx=5,pady=5,columnspan=3)
 
 tit=Label(frame1,text="Title : ",font=("times",12,"bold"),bg="pink").grid(row=1,column=0,padx=5,pady=5,sticky=E)
