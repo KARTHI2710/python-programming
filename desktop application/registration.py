@@ -5,6 +5,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 import sqlite3
+import re
 con=sqlite3.connect("patientdatabase.db")
 # Create the "patient" table if it doesn't exist
 create_table_query = '''
@@ -46,15 +47,24 @@ def page3():
         root1.destroy()
         root2=tkinter.Tk()
         root2.geometry("500x500")
-        l1=Label(root2,text="UID : "+uid,font=("times",11,"bold")).pack(padx=5,pady=5)
-        l2=Label(root2,text="Patient name : "+pn,font=("times",11,"bold")).pack(padx=5,pady=5)
-        l3=Label(root2,text="Gender : "+gen,font=("times",11,"bold")).pack(padx=5,pady=5)
-        l4=Label(root2,text="Email : "+email,font=("times",11,"bold")).pack(padx=5,pady=5)
-        l5=Label(root2,text="Phone no : "+ph,font=("times",11,"bold")).pack(padx=5,pady=5)
-        l6=Label(root2,text="Address : "+add,font=("times",11,"bold")).pack(padx=5,pady=5)
-        l7=Label(root2,text="Title : "+title,font=("times",11,"bold")).pack(padx=5,pady=5)
-        l8=Label(root2,text="Doctor Name : "+docname,font=("times",11,"bold")).pack(padx=5,pady=5)
-        l9=Label(root2,text="Treatment : "+treat,font=("times",11,"bold")).pack(padx=5,pady=5)
+        l1=Label(root2,text="UID : ",font=("times",11,"bold")).grid(row=0,column=0,padx=5,pady=5,sticky='w')
+        lt1=Label(root2,text=uid,font=("times",11,"bold")).grid(row=0,column=1,padx=5,pady=5,sticky='w')
+        l2=Label(root2,text="Patient name : ",font=("times",11,"bold")).grid(row=1,column=0,padx=5,pady=5,sticky='w')
+        lt2=Label(root2,text=pn,font=("times",11,"bold")).grid(row=1,column=1,padx=5,pady=5,sticky='w')
+        l3=Label(root2,text="Gender : ",font=("times",11,"bold")).grid(row=2,column=0,padx=5,pady=5,sticky='w')
+        lt3=Label(root2,text=gen,font=("times",11,"bold")).grid(row=2,column=1,padx=5,pady=5,sticky='w')
+        l4=Label(root2,text="Email : ",font=("times",11,"bold")).grid(row=3,column=0,padx=5,pady=5,sticky='w')
+        lt4=Label(root2,text=email,font=("times",11,"bold")).grid(row=3,column=1,padx=5,pady=5,sticky='w')
+        l5=Label(root2,text="Phone no : ",font=("times",11,"bold")).grid(row=4,column=0,padx=5,pady=5,sticky='w')
+        lt5=Label(root2,text=ph,font=("times",11,"bold")).grid(row=4,column=1,padx=5,pady=5,sticky='w')
+        l6=Label(root2,text="Address : ",font=("times",11,"bold")).grid(row=5,column=0,padx=5,pady=5,sticky='w')
+        lt6=Label(root2,text=add,font=("times",11,"bold")).grid(row=5,column=1,padx=5,pady=5,sticky='w')
+        l7=Label(root2,text="Title : ",font=("times",11,"bold")).grid(row=6,column=0,padx=5,pady=5,sticky='w')
+        lt7=Label(root2,text=title,font=("times",11,"bold")).grid(row=6,column=1,padx=5,pady=5,sticky='w')
+        l8=Label(root2,text="Doctor Name : ",font=("times",11,"bold")).grid(row=7,column=0,padx=5,pady=5,sticky='w')
+        lt8=Label(root2,text=docname,font=("times",11,"bold")).grid(row=7,column=1,padx=5,pady=5,sticky='w')
+        l9=Label(root2,text="Treatment : ",font=("times",11,"bold")).grid(row=8,column=0,padx=5,pady=5,sticky='w')
+        lt9=Label(root2,text=treat,font=("times",11,"bold")).grid(row=8,column=1,padx=5,pady=5,sticky='w')
         insert()
         root1.mainloop()
 
@@ -82,13 +92,20 @@ def page2():
     global root1
     root1=tkinter.Tk()
     root1.geometry("500x500")
-    l1=Label(root1,text="UID : "+uid,font=("times",11,"bold")).pack(padx=5,pady=5)
-    l2=Label(root1,text="Patient name : "+pn,font=("times",11,"bold")).pack(padx=5,pady=5)
-    l3=Label(root1,text="Gender : "+gen,font=("times",11,"bold")).pack(padx=5,pady=5)
-    l4=Label(root1,text="Email : "+email,font=("times",11,"bold")).pack(padx=5,pady=5)
-    l5=Label(root1,text="Phone no : "+ph,font=("times",11,"bold")).pack(padx=5,pady=5)
-    l6=Label(root1,text="Address : "+add,font=("times",11,"bold")).pack(padx=5,pady=5)
-    l7=Label(root1,text="Title : "+title,font=("times",11,"bold")).pack(padx=5,pady=5)
+    l1=Label(root1,text="UID : ",font=("times",11,"bold")).grid(row=0,column=0,padx=5,pady=5,sticky='w')
+    lt1=Label(root1,text=uid,font=("times",11,"bold")).grid(row=0,column=1,padx=5,pady=5,sticky='w')
+    l2=Label(root1,text="Patient name : ",font=("times",11,"bold")).grid(row=1,column=0,padx=5,pady=5,sticky='w')
+    lt2=Label(root1,text=pn,font=("times",11,"bold")).grid(row=1,column=1,padx=5,pady=5,sticky='w')
+    l3=Label(root1,text="Gender : ",font=("times",11,"bold")).grid(row=2,column=0,padx=5,pady=5,sticky='w')
+    lt3=Label(root1,text=gen,font=("times",11,"bold")).grid(row=2,column=1,padx=5,pady=5,sticky='w')
+    l4=Label(root1,text="Email : ",font=("times",11,"bold")).grid(row=3,column=0,padx=5,pady=5,sticky='w')
+    lt4=Label(root1,text=email,font=("times",11,"bold")).grid(row=3,column=1,padx=5,pady=5,sticky='w')
+    l5=Label(root1,text="Phone no : ",font=("times",11,"bold")).grid(row=4,column=0,padx=5,pady=5,sticky='w')
+    lt5=Label(root1,text=ph,font=("times",11,"bold")).grid(row=4,column=1,padx=5,pady=5,sticky='w')
+    l6=Label(root1,text="Address : ",font=("times",11,"bold")).grid(row=5,column=0,padx=5,pady=5,sticky='w')
+    lt6=Label(root1,text=add,font=("times",11,"bold")).grid(row=5,column=1,padx=5,pady=5,sticky='w')
+    l7=Label(root1,text="Title : ",font=("times",11,"bold")).grid(row=6,column=0,padx=5,pady=5,sticky='w')
+    lt7=Label(root1,text=title,font=("times",11,"bold")).grid(row=6,column=1,padx=5,pady=5,sticky='w')
     docname=Label(root1,text="Doctor name : ",font=("times",11,"bold")).place(x=100,y=300)
     docnametxt=Entry(root1,font=("times",11,"bold"))
     docnametxt.place(x=200,y=300)
@@ -101,9 +118,14 @@ def page2():
 
     
 def save():
-    if(uidtext.get() != ''  and pattext.get() != "" and gend.get() != ' ' and emailtext.get() != "" and titdrop.get() != "" and phnotext.get() != "" and len(addresstext.get("1.0",END)) > 1):
+    patname=r'[a-zA-Z]{1,}'
+    patemail=r'[a-z]+\@gmail.com'
+    patmob=r'^\d{10}$'
+    if(uidtext.get() != ''  and pattext.get() != "" and gend.get() != ' ' and emailtext.get() != "" and titdrop.get() != "" and
+      re.match(patname,pattext.get())  and re.match(patmob,phnotext.get()) and phnotext.get() != "" and re.match(patemail,emailtext.get()) and len(addresstext.get("1.0",END)) > 1):
         
         #page2(uidtext.get(),pattext.get(),gen.get(),emailtext.get(),phnotext.get(),addresstext.get("1.0","end-1c"),titdrop.get())
+        
         global uid,pn,gen,email,ph,add,title
         uid=uidtext.get()
         pn=pattext.get()
@@ -117,7 +139,7 @@ def save():
 
        
     else:
-        messagebox.showinfo("message","enter all the fields")
+        messagebox.showinfo("message","enter all the fields or enter correct details")
     
 root=tkinter.Tk()
 root.geometry("500x500")
